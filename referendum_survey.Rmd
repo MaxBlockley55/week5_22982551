@@ -17,8 +17,37 @@ referendum_raw %>%
                values_to = "Missing_Count") %>%
   arrange(desc(Missing_Count)) %>%
   knitr::kable(
-    caption = "Number of missing values per variable"
+    caption = "Number Of Missing Values"
   ) %>%
   kable_styling(full_width = FALSE)
 ```
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
+referendum_clean = referendum_raw |>
+  drop_na()
+
+ggplot(referendum_clean, aes(x = age)) +
+  geom_histogram(alpha = 0.6, fill = "black") +
+  facet_wrap(~ gender, ncol = 2) +
+  labs(title = "Age Distribution by Gender",
+       x = "Age", y = "Counts") +
+  theme_minimal()
+
+```
+
+
+The distribution shows that most of the respondents identify as either male of female with most of them being in the 40 - 70 age bracket. The female distribution seems the be symmetrical and the male of looks to have a slighly left-skew.
+
+The other gender categorizes dont have nearly have as much data/observations making it alot harder to interpret any trends. I would recommend the client collect more sampling to make good analysis on these other genders.
+
+So because of the lack of data in the other categorizes most of the conclusions made will be based upon the male female data.
+
+```{r, echo=FALSE}
+library(broom)
+
+```
+
+
+
+
+
 
