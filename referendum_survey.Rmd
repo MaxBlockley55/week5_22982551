@@ -43,8 +43,32 @@ So because of the lack of data in the other categorizes most of the conclusions 
 
 ```{r, echo=FALSE}
 library(broom)
+ref_model <- glm(referendum ~ age + gender,
+                 data = referendum_raw,
+                 family = binomial)
+tidy(ref_model) %>%
+  mutate(term = gsub("gender", "", term)) %>%
+  kable(caption = "Logistic regression predictors of voting",
+        col.names = c("Term", "Estimate", "Standard Error", "z-value", "P-value"),
+        align = "c",
+        escape = TRUE,
+        booktabs = TRUE)
+        
+```
+
+
+The logistic regression predictors suggest that age and gender appear to have influence to chance of a YES vote. It seems that for age with at estimate of -0.029 means that younger voters are likely to vote yes.Female voters are more likely to vote YES then males as we can see with the estimates of -0.41 for males and 1.99 for females. For the other categorizes we don't have a big enough sample size and so they are insignificant (pvalue > 0.05). This means we cant draw any reliable conclusions.
+
+```{r, echo=FALSE}
+
 
 ```
+
+
+
+
+
+
 
 
 
