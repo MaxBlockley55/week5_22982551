@@ -88,6 +88,8 @@ pooled_sum %>%
 
 
 
+Conclusion:
+Across all analyses, age was a significant factor, with older people being less likely to vote in favour of the referendum. Being male also ment less chance of voting “yes” compared to the reference group(female). Other gender identities did not show statistically significant differences from the reference group. These findings were the same across both the original and multiple-imputation analyses, suggesting that missing data had little impact on the main results.
 
 
 
