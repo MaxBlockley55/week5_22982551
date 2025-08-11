@@ -60,8 +60,29 @@ tidy(ref_model) %>%
 The logistic regression predictors suggest that age and gender appear to have influence to chance of a YES vote. It seems that for age with at estimate of -0.029 means that younger voters are likely to vote yes.Female voters are more likely to vote YES then males as we can see with the estimates of -0.41 for males and 1.99 for females. For the other categorizes we don't have a big enough sample size and so they are insignificant (pvalue > 0.05). This means we cant draw any reliable conclusions.
 
 ```{r, echo=FALSE}
+library(tidyverse)
+library(mice)
+library(broom)
+library(kableExtra)
+referendum_imputed <- mice(referendum_raw)
+mice_model = with(referendum_imputed, glm(referendum ~ age + gender, family = binomial))
+
+pooled_res = pool(mice_model)
+
+pooled_sum <- tidy(pooled_res) %>%
+  mutate(term = gsub("gender", "",term))
+
+pooled_sum %>%
+  select(term, estimate, std.error, statistic, p.value) %>%
+  kable(caption = "Referendum Multiple imputaion (Pooled logistic regression)",
+        col.names = c("Term", "Estimate", "Std.Error", "Statistic", "P.value"),
+        align = "c", 
+        booktabs = TRUE)
 
 
+  
+  
+  
 ```
 
 
