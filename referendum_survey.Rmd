@@ -1,0 +1,24 @@
+---
+title: "week_5_lab"
+author: "Max_B"
+date: "2025-08-11"
+output: pdf_document
+---
+
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+referendum_raw <- referendum_survey_lab_version
+referendum_raw %>%
+  summarise(across(everything(), ~ sum(is.na(.)))) %>%
+  pivot_longer(cols = everything(),
+               names_to = "Variable",
+               values_to = "Missing_Count") %>%
+  arrange(desc(Missing_Count)) %>%
+  knitr::kable(
+    caption = "Number of missing values per variable"
+  ) %>%
+  kable_styling(full_width = FALSE)
+```
+
